@@ -58,6 +58,7 @@ class rc_factory(object):
             _is_string/_base_content_is_iter flag is updated when the
             _set_content method (via the content property) is called
             """
+
             def _set_content(self, content):
                 """
                 Set the _container and _is_string /
@@ -79,8 +80,17 @@ class rc_factory(object):
                 else:
                     self._is_string = is_string
 
-            content = property(HttpResponse._get_content, _set_content)            
+            try:
+                # Django versoin is older than 1.5
 
+                content = property(HttpResponse._get_content, _set_content)
+
+            except:
+                # Django version 1.5
+
+                @HttpResponse.content.setter
+                def content(self, content):
+                    self._set_content(content)
         return HttpResponseWrapper(r, content_type='text/plain', status=c)
     
 rc = rc_factory()
