@@ -44,7 +44,7 @@ except ImportError:
 
 try:
     from django.utils import simplejson
-except ImportError
+except ImportError:
     import json as simplejson
 # Allow people to change the reverser (default `permalink`).
 reverser = permalink
