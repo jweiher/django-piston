@@ -22,7 +22,6 @@ except NameError:
 
 from django.db.models.query import QuerySet
 from django.db.models import Model, permalink
-from django.utils import simplejson
 from django.utils.xmlutils import SimplerXMLGenerator
 from django.utils.encoding import smart_unicode
 from django.core.urlresolvers import reverse, NoReverseMatch
@@ -43,6 +42,10 @@ try:
 except ImportError:
     import pickle
 
+try:
+    from django.utils import simplejson
+except ImportError
+    import json as simplejson
 # Allow people to change the reverser (default `permalink`).
 reverser = permalink
 
